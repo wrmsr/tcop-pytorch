@@ -94,11 +94,11 @@ std::vector<at::Tensor> masked_softmax_cuda_forward(
     at::Tensor input,
     at::Tensor mask,
     at::Tensor scale) {
-  AT_CHECK(input.dim() == 4, "input has an incorrect shape");
-  AT_CHECK(mask.dim() == 2, "mask has an incorrect shape");
-  AT_CHECK(mask.size(0) == 1 || mask.size(0) == input.size(0),
+  TORCH_CHECK(input.dim() == 4, "input has an incorrect shape");
+  TORCH_CHECK(mask.dim() == 2, "mask has an incorrect shape");
+  TORCH_CHECK(mask.size(0) == 1 || mask.size(0) == input.size(0),
            "mask dim #0 has an incorrect shape");
-  AT_CHECK(mask.size(1) == 1 || mask.size(1) == input.size(2),
+  TORCH_CHECK(mask.size(1) == 1 || mask.size(1) == input.size(2),
            "mask dim #2 has an incorrect shape");
 
   auto output = at::zeros_like(input);
